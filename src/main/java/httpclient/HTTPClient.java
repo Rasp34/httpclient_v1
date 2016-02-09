@@ -5,6 +5,11 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.Socket;
 
+/**
+ *
+ *
+ *
+ */
 
 public class HTTPClient {
 	
@@ -15,22 +20,22 @@ public class HTTPClient {
 			byte buf[] = new byte[64*1024];
 			int r;
 			
-//			читаем файл с запросом в сроку header
+//			РЎС‡РёС‚С‹РІР°РµРј Р·Р°РїСЂРѕСЃС‹
 			FileInputStream fileInputStream = new FileInputStream(args[0]);
 			r = fileInputStream.read(buf);
 			String header = new String(buf, 0, r);
 			fileInputStream.close();
 			
-//			выделим хост, порт и url
+//			РџР°СЂСЃРёРЅРі СЃС‚СЂРѕРє
 			String host = extract(header, "Host:", "\n");
 			
-//			ошибка отсутствия хоста
+//			РџСЂРѕРІРµСЂРєР° С…РѕСЃС‚Р°
 			if ( host == null) {
 				System.out.println("invalid request:\n" + header);
 				return;
 			}
 			
-//			находим порт сервера
+//
 			int port = host.indexOf(":", 0);
 			if (port < 0 ) {
 				port = 80;
@@ -40,19 +45,19 @@ public class HTTPClient {
 				host = host.substring(0, port);
 			}
 			
-//			открываем сокет до сервера
+//			пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			Socket s = new Socket(host, port);
 			
-//			отправляем http request
+//			пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ http request
 			s.getOutputStream().write(header.getBytes());
 			
-//			получаем поток данных от сервера
+//			пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			InputStream inputStream = s.getInputStream();
 			
-//			запишем в файл
+//			пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
 			FileOutputStream fos = new FileOutputStream(args[1]);
 			
-//			читаем ответ сервера
+//			пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			r = 1;
 			while (r > 0) {
 				
