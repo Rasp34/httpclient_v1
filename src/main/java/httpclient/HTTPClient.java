@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.net.Socket;
 
 /**
- *
- *
- *
+ * HTTP client from
  */
 
 public class HTTPClient {
