@@ -1,4 +1,4 @@
-GET https://ru.wikipedia.org/wiki/HTTP HTTP/1.1
-Host: ru.wikipedia.org
-User-Agent: HTTPClient
+HEAD https://habrahabr.ru/post/215117/ HTTP/1.1
+Host: habrahabr.ru
+User-Agent: ClinetHTTP
 

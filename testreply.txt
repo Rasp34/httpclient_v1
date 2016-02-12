@@ -1,16 +1,11 @@
 HTTP/1.1 301 TLS Redirect
 Server: Varnish
-Location: https://ru.wikipedia.org/wiki/HTTP
+Location: https://ru.wikipedia.orghttp://ru.wikipedia.org
 Content-Length: 0
-Accept-Ranges: bytes
-Date: Tue, 08 Dec 2015 11:08:20 GMT
-X-Varnish: 4281557253
-Age: 0
-Via: 1.1 varnish
-Connection: close
-X-Cache: cp3008 frontend miss (0)
-Set-Cookie: WMF-Last-Access=08-Dec-2015;Path=/;HttpOnly;Expires=Sat, 09 Jan 2016 00:00:00 GMT
+
+
+
+Set-Cookie: WMF-Last-Access=12-Feb-2016;Path=/;HttpOnly;Expires=Tue, 15 Mar 2016 12:00:00 GMT
 X-Client-IP: 46.47.212.210
-Cache-Control: private, s-maxage=0, max-age=0, must-revalidate
 Set-Cookie: GeoIP=RU:66:Saint_Petersburg:59.89:30.26:v4; Path=/; Domain=.wikipedia.org
 

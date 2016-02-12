@@ -1,8 +1,12 @@
 package httpclient;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Server
@@ -17,7 +21,13 @@ public class ServerTest {
         System.out.println("Server socket open;");
 
         System.out.println("waiting request...");
-        socket.accept();
+        Socket clientSocket = socket.accept();
+
+        InputStream inputStream = clientSocket.getInputStream();
+        BufferedReader buff = new BufferedReader(new InputStreamReader(inputStream));
+
+        if (buff.readLine()!= null)  System.out.println(buff.readLine());
+        else System.out.println("Null string");
 
         System.out.println("Request catch");
 

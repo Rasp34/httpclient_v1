@@ -42,20 +42,20 @@ public class HTTPClient {
 				port = Integer.parseInt(host.substring(port+1));
 				host = host.substring(0, port);
 			}
-			
-//			��������� ����� �� �������
+
+//			Watch
+			System.out.println(port);
+			System.out.println(host);
+			System.out.println(header);
+
 			Socket s = new Socket(host, port);
-			
-//			���������� http request
+
 			s.getOutputStream().write(header.getBytes());
-			
-//			�������� ����� ������ �� �������
+
 			InputStream inputStream = s.getInputStream();
-			
-//			������� � ����
+
 			FileOutputStream fos = new FileOutputStream(args[1]);
-			
-//			������ ����� �������
+
 			r = 1;
 			while (r > 0) {
 				

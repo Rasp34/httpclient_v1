@@ -1,59 +1,60 @@
 package Http;
 
+
 import java.io.*;
-import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Arrays;
 
 /**
  * First http test
  */
 public class Http_v1 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        String link = "GET https://ru.wikipedia.org/wiki/HTTP";
-        String host = "ru.wikipedia.org";
-        int port = 3001;
+        String host = "habrahabr.ru";
+        int port = 80;
+
+//        Считываем запросы
+        byte[] buf = new byte[64*1024];
+//        В запросе в конце обязательно необходимо два сброса на новую строку \n\n
+        FileInputStream fileInputStream = new FileInputStream(args[0]);
+        fileInputStream.read(buf);
+        fileInputStream.close();
+
+//        String header = "HEAD https://ru.wikipedia.org/wiki/HTTP HTTP/1.1\nHost: ru.wikipedia.org\nUser-Agent: HTTPClient\n\n";
+//        buf = header.getBytes("UTF-8");
 
         try {
 
-//        Откроем сокет
-//          Добавить сокет!!!
-            System.out.println("Socket was open: " + host + "; Port: " + port);
+            Socket socket = new Socket(host, port);
 
-            if (socket.isBound()) {
-                System.out.println("Connected");
-            }else System.out.println("Fail connected");
+            if (socket.isConnected()) System.out.println("Connect with host: " + host);
+            else System.out.println("Fail connected");
 
-            /*
-//        Отправим сообщение
-            socket.getOutputStream().write(link.getBytes());
-            System.out.println("Send GET request;");
+            socket.getOutputStream().write(buf);
+            System.out.println("Request send\n" + "Wait response...\n" );
 
-//        Поймаем ответ
-            InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
-            BufferedReader buffer = new BufferedReader(inputStreamReader);
-            FileWriter fileWriter = new FileWriter("ResponceHttp_v1.txt");
-            System.out.println("Create socket input stream;");
+            InputStreamReader inputStreamReader= new InputStreamReader(socket.getInputStream());
+            BufferedReader buff = new BufferedReader(inputStreamReader);
 
-//        Запишем ответ в файл
-            System.out.println("Response will be write into file...");
-            String line = null;
+            String dataLine;
             while (true){
 
-                line = buffer.readLine();
-                if (line != null) {
-                    fileWriter.write(line);
-                }
+                dataLine = buff.readLine();
+                if (dataLine!=null) System.out.println(dataLine);
                 else break;
 
-            }
-            System.out.println("End operation;");*/
 
-//        Закроем сокет
+            }
+
+
+            System.out.println("Complete");
             socket.close();
-            System.out.println("Socket was closed;");
+            System.out.println("Socket closed");
+
 
         } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
